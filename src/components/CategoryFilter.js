@@ -1,44 +1,45 @@
 import React from "react";
 import { v4 as uuid } from "uuid";
 
-function CategoryFilter({ categories, tasks, setTasks }) {
+function CategoryFilter({
+  categories,
+  tasks,
+  setTasks,
+  selectedCategory,
+  setSelectedCategory,
+  filterTaskList,
+}) {
   // Update this component to display <button> elements
   // for each category (again, make sure to use a key prop).
 
-  const buttons = categories.map((category) => (
-    <button className={null} id={category} key={uuid()} onClick={handleClick}>
-      {category}
-    </button>
-  ));
-
-  function handleClick(e) {
-    console.log(e.target.classList);
-
-    console.log("buttons: ", buttons);
-    debugger;
+  const buttons = categories.map((category) => {
+    // CHANGING BUTTON CLASSES WHEN CLICKED
+    // Create the "All" button with a starting className of selected, and other buttons start with null
     // Whichever button was clicked should have a class of selected.
     // The other buttons should not have any class assigned.
-    // Access list of buttons and change class only for the one that was clicked
-    //    use .map() with if-else inside
 
-    // const updatedButtons = buttons.map((button) => {
-    //   if (button.id === e.target.id) {
-    //     button.className = "selected";
-    //     return button;
-    //   } else {
-    //     return button;
-    //   }
-    // });
+    // Error: Tried to update the button className directly.
+    //        This didn't work because you have to trigger an update using state.
+    const className = selectedCategory === category ? "selected" : null;
+    return (
+      <button
+        className={className}
+        id={category}
+        key={uuid()}
+        onClick={handleClick}
+      >
+        {category}
+      </button>
+    );
+  });
 
-    // Error: Am I accessing the button's id correctly with button.id?
-
-    // console.log("updated buttons: ", updatedButtons);
-
-    // The list of tasks being displayed should be filtered, so that only
-    // tasks that match the category that was clicked are displayed.
-
-    // If the button for "All" is selected, all the tasks should be displayed.
+  function handleClick(e) {
+    // UPDATE STATE TO SHOW WHICH BUTTON WAS SELECTED
+    setSelectedCategory(e.target.id);
+    filterTaskList();
   }
+
+  // use the udpated value of selectedCategory to filter the task list
 
   return (
     <div className="categories">

@@ -2,7 +2,7 @@ import React from "react";
 import Task from "./Task";
 import { v4 as uuidv4 } from "uuid";
 
-function TaskList({ tasks, setTasks }) {
+function TaskList({ tasks, setTasks, selectedCategory, setSelectedCategory }) {
   const taskComponents = tasks.map((task) => (
     <Task
       category={task.category}
