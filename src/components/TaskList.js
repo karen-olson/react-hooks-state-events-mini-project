@@ -14,8 +14,8 @@ function TaskList({ tasks, setTasks }) {
   ));
 
   function handleDelete(e) {
-    const updatedTasks = tasks.filter((task) => e.target.id !== task.text);
-    setTasks(updatedTasks);
+    const tasksToDisplay = tasks.filter((task) => e.target.id !== task.text);
+    setTasks(tasksToDisplay);
   }
 
   return <div className="tasks">{taskComponents}</div>;
