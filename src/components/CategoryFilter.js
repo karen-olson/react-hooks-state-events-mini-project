@@ -1,14 +1,7 @@
 import React from "react";
 import { v4 as uuid } from "uuid";
 
-function CategoryFilter({
-  categories,
-  tasks,
-  setTasks,
-  selectedCategory,
-  setSelectedCategory,
-  filterTaskList,
-}) {
+function CategoryFilter({ categories, selectedCategory, setSelectedCategory }) {
   // Update this component to display <button> elements
   // for each category (again, make sure to use a key prop).
 
@@ -23,6 +16,7 @@ function CategoryFilter({
     const className = selectedCategory === category ? "selected" : null;
     return (
       <button
+        name={category}
         className={className}
         id={category}
         key={uuid()}
@@ -36,10 +30,11 @@ function CategoryFilter({
   function handleClick(e) {
     // UPDATE STATE TO SHOW WHICH BUTTON WAS SELECTED
     setSelectedCategory(e.target.id);
-    filterTaskList();
-  }
+    console.log(selectedCategory);
 
-  // use the udpated value of selectedCategory to filter the task list
+    // use the udpated value of selectedCategory to filter the task list
+    // filterTaskList();
+  }
 
   return (
     <div className="categories">
